@@ -1,10 +1,9 @@
 name: NPM Publish
 
 on:
-  workflow_run:
-    workflows: [Canary Release, Stable release]
-    types:
-      - completed
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   publish-npm:
