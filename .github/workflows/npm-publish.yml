@@ -32,10 +32,10 @@ jobs:
 
           if [[ "$VERSION" == *"-canary."* ]]; then
             echo "Publishing canary version"
-            # npm publish --tag canary
+            # npm publish --tag canary --access public
           else
             echo "Publishing latest version"
-            # npm publish
+            # npm publish --access public
           fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
