@@ -1,11 +1,11 @@
-name: Node.js Package
+name: NPM Publish
 
 on:
   # Trigger the workflow on push or pull request,
-  # but only for the master branch
+  # but only for tags
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 jobs:
   publish-npm:
@@ -17,7 +17,11 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm run build
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm run build -- --define VERSION=${GITHUB_REF_NAME#v}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: dist
+      # - run: npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}
