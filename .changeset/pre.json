@@ -5,5 +5,6 @@
     "@btsd/aitu-bridge": "0.7.2-canary.3"
   },
   "changesets": [
+    "floppy-views-speak"
   ]
 }
